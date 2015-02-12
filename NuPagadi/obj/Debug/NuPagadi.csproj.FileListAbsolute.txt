@@ -1,0 +1,2 @@
+C:\Users\User\Documents\Telerik\C#2\Water Elemental -TeamWork\Team Work\NuPagadi\bin\Debug\NuPagadi.exe.config
+C:\Users\User\Documents\Telerik\C#2\Water-Elemental---Game\NuPagadi\bin\Debug\NuPagadi.exe.config
