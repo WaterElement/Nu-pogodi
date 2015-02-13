@@ -1,0 +1,6 @@
+D:\Telerik\Water Element\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe.config
+D:\Telerik\Water Element\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe
+D:\Telerik\Water Element\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.pdb
+D:\Telerik\Water Element\Nu-pogodi\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache
+D:\Telerik\Water Element\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.exe
+D:\Telerik\Water Element\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.pdb
