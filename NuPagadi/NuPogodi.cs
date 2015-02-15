@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading;
 
 
@@ -17,12 +18,17 @@ class NuPagadi
     //
     private static void DrawField(char[,] gameField)
     {
+
         for (int i = 0; i < gameField.GetLength(0); i++)
         {
+            StringBuilder field = new StringBuilder();
+
             for (int j = 0; j < gameField.GetLength(1); j++)
             {
-                Console.Write(gameField[i, j]);
+                //Console.Write(gameField[i, j]);
+                field.Append(gameField[i,j]);
             }
+            Console.Write(field);
             Console.WriteLine();
         }
     }
