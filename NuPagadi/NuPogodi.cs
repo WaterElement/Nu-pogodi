@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 
 
@@ -13,6 +14,96 @@ class Egg
 }
 class NuPagadi
 {
+    //
+    private static void DrawField(char[,] gameField)
+    {
+        for (int i = 0; i < gameField.GetLength(0); i++)
+        {
+            for (int j = 0; j < gameField.GetLength(1); j++)
+            {
+                Console.Write(gameField[i, j]);
+            }
+            Console.WriteLine();
+        }
+    }
+    private static void ResetEnvironment(char[,] gameField)
+    {
+        StreamReader reader = new StreamReader("environment.txt");
+
+        char[,] environment = new char[31, 76];
+        //string[] env = new string[31];
+
+        using (reader)
+        {
+            for (int i = 0; i < gameField.GetLength(0); i++)
+            {
+                string line = reader.ReadLine();
+                //char[] charArr = line.ToCharArray();
+                for (int j = 0; j < gameField.GetLength(1); j++)
+                {
+                    gameField[i, j] = line[j];
+                }
+            }
+
+            //while (line != null)
+            //{
+            //    Console.WriteLine(line);
+            //    line = reader.ReadLine();
+            //}
+        }
+    }
+    static void AddWolfRight(char[,] env)
+    {
+        const int positionY = 13;
+        const int positionX = 36;
+
+        PlaceWolf(env, positionX, positionY, "right");
+    }
+    static void AddWolfLeft(char[,] env)
+    {
+        const int positionY = 13;
+        const int positionX = 13;
+
+        PlaceWolf(env, positionX, positionY, "left");
+    }
+    private static void PlaceWolf(char[,] env, int positionX, int positionY, string wolfPosition)
+    {
+        string fileName = String.Empty;
+
+        switch (wolfPosition)
+        {
+            case "left":
+                fileName = "wolfleft.txt";
+                break;
+            case "right":
+                fileName = "wolfright.txt";
+                break;
+        }
+
+        StreamReader reader = new StreamReader(fileName);
+        int verticalLinesCounter = 0;
+
+        using (reader)
+        {
+            while (true)
+            {
+                string line = reader.ReadLine();
+
+                if (line == null)
+                {
+                    break;
+                }
+
+                for (int i = 0; i < line.Length; i++)
+                {
+                    env[positionY + verticalLinesCounter, positionX + i] = line[i];
+                }
+
+                verticalLinesCounter++;
+            }
+        }
+    }
+    //
     static void PrintOnPosition(int x, int y, string c, ConsoleColor color = ConsoleColor.Gray)
     {
         Console.SetCursorPosition(x, y);
@@ -27,8 +118,24 @@ class NuPagadi
     }
     static void Main()
     {
-        Console.BufferHeight =  100;
-        Console.BufferWidth =  200;
+        //Orlin Sunday morning edits
+
+        char[,] gameField = new char[31, 76];
+
+        Console.SetWindowSize(77, 32); //set console window size
+        Console.SetBufferSize(77, 32); //removes the scroll bars if equal to window size
+        ResetEnvironment(gameField);
+        AddWolfRight(gameField);
+
+
+
+        //End Orlin Sunday morning edits
+
+
+
+        //Console.BufferHeight = 100;
+        //Console.BufferWidth = 200;
+
         //Console.WindowHeight = Console.BufferHeight;      // tuk mi dava greshka ne iska da gi priravni, moje i v moq komp da e!!
         //Console.WindowWidth = Console.BufferWidth;
 
@@ -50,18 +157,30 @@ class NuPagadi
 
         while (true)
         {
+
+            //Orlin
+
+
+            Thread.Sleep(100);
+            Console.Clear();
+
+
+            //End Orlin
+
+
+
             // GAME START SCREEN
             //Draw the field - from txt file
 
 
             //Draw the eggs
-            for (int i = 0; i <2 ; i++)
+            for (int i = 0; i < 2; i++)
             {
                 Egg newEgg = new Egg();
-                int chance = randomGenerator.Next(0,100);
-                if (chance<60)
+                int chance = randomGenerator.Next(0, 100);
+                if (chance < 60)
                 {
-                    
+
                 }
                 else
                 {
@@ -98,7 +217,7 @@ class NuPagadi
                             break;
                     }
                 }
-               
+
             }
 
             //Move the eggs
@@ -109,9 +228,9 @@ class NuPagadi
                 // Check for impact
                 if (eggsUpLeft[i].y > basketUpLevel)
                 {
-                    PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
+                    //Console.WriteLine();
+                    //Environment.Exit(0);
                     //lives--;
                     ////eggSmash = true;
                     //if (lives <= 0)
@@ -128,11 +247,11 @@ class NuPagadi
             {
                 eggsDownLeft[i].x++;
                 eggsDownLeft[i].y++;
-                if ( eggsDownLeft[i].y>basketDownLevel)
+                if (eggsDownLeft[i].y > basketDownLevel)
                 {
-                    PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
+                    //Console.WriteLine();
+                    //Environment.Exit(0);
                 }
             }
             for (int i = 0; i < eggsUpRight.Count; i++)
@@ -141,9 +260,9 @@ class NuPagadi
                 eggsUpRight[i].y++;
                 if (eggsUpRight[i].y > basketUpLevel)
                 {
-                    PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
+                    //Console.WriteLine();
+                    //Environment.Exit(0);
                 }
             }
             for (int i = 0; i < eggsDownRight.Count; i++)
@@ -152,17 +271,17 @@ class NuPagadi
                 eggsDownRight[i].y++;
                 if (eggsDownRight[i].y > basketDownLevel)
                 {
-                    PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
+                    //Console.WriteLine();
+                    //Environment.Exit(0);
                 }
             }
             //Clear the console
-            Console.Clear();
+            //Console.Clear();
             //Redraw playfield
             foreach (var egg in eggsUpLeft)
             {
-                PrintOnPosition(egg.x,egg.y,egg.z,egg.color);
+                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
             }
             foreach (var egg in eggsDownLeft)
             {
@@ -179,16 +298,42 @@ class NuPagadi
             //Move the wolf
             //Scoring system
             //Slow down program
-            Thread.Sleep((int)(400 - speed));
-            if (score % 20 == 0 && score != 0)
+
+            //Thread.Sleep((int)(400 - speed));
+            //if (score % 20 == 0 && score != 0)
+            //{
+            //    speed += 10;
+            //    if (speed > maxSpeed)
+            //    {
+            //        speed = maxSpeed;
+            //    }
+            //}
+
+            //Orlin Sunday Morning
+
+            while (Console.KeyAvailable)
             {
-                speed += 10;
-                if (speed > maxSpeed)
+                ConsoleKeyInfo pressedKey = Console.ReadKey();
+                if (pressedKey.Key == ConsoleKey.LeftArrow)
                 {
-                    speed = maxSpeed;
+                    ResetEnvironment(gameField);
+                    AddWolfLeft(gameField);
+                }
+                if (pressedKey.Key == ConsoleKey.RightArrow)
+                {
+                    ResetEnvironment(gameField);
+                    AddWolfRight(gameField);
                 }
             }
+
+            Console.SetCursorPosition(0, 0);
+            DrawField(gameField);
+            //End Orlin Sunday Morning
+
         }
+
+
+
 
 
         //proba stella
