@@ -124,6 +124,7 @@ class NuPagadi
 
         Console.SetWindowSize(77, 32); //set console window size
         Console.SetBufferSize(77, 32); //removes the scroll bars if equal to window size
+        Console.CursorVisible = false;
         ResetEnvironment(gameField);
         AddWolfRight(gameField);
 
