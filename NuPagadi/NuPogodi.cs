@@ -26,7 +26,7 @@ class NuPagadi
             for (int j = 0; j < gameField.GetLength(1); j++)
             {
                 //Console.Write(gameField[i, j]);
-                field.Append(gameField[i,j]);
+                field.Append(gameField[i, j]);
             }
             Console.Write(field);
             Console.WriteLine();
@@ -286,22 +286,7 @@ class NuPagadi
             //Clear the console
             //Console.Clear();
             //Redraw playfield
-            foreach (var egg in eggsUpLeft)
-            {
-                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
-            }
-            foreach (var egg in eggsDownLeft)
-            {
-                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
-            }
-            foreach (var egg in eggsUpRight)
-            {
-                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
-            }
-            foreach (var egg in eggsDownRight)
-            {
-                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
-            }
+
             //Move the wolf
             //Scoring system
             //Slow down program
@@ -332,10 +317,27 @@ class NuPagadi
                     AddWolfRight(gameField);
                 }
             }
+            //End Orlin Sunday Morning
 
             Console.SetCursorPosition(0, 0);
             DrawField(gameField);
-            //End Orlin Sunday Morning
+
+            foreach (var egg in eggsUpLeft)
+            {
+                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
+            }
+            foreach (var egg in eggsDownLeft)
+            {
+                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
+            }
+            foreach (var egg in eggsUpRight)
+            {
+                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
+            }
+            foreach (var egg in eggsDownRight)
+            {
+                PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
+            }
 
         }
 
