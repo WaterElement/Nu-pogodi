@@ -250,7 +250,7 @@ class NuPagadi
             //Move the eggs
             for (int i = 0; i < eggsUpLeft.Count; i++)
             {
-                if (eggsUpLeft[i].y < Console.WindowHeight - 1)
+                if (eggsUpLeft[i].y < Console.WindowHeight - 2)
                 {
                     eggsUpLeft[i].x++;
                     eggsUpLeft[i].y++;
@@ -275,7 +275,7 @@ class NuPagadi
             }
             for (int i = 0; i < eggsDownLeft.Count; i++)
             {
-                if (eggsDownLeft[i].y < Console.WindowHeight - 1)
+                if (eggsDownLeft[i].y < Console.WindowHeight - 2)
                 {
                     eggsDownLeft[i].x++;
                     eggsDownLeft[i].y++;
@@ -289,7 +289,7 @@ class NuPagadi
             }
             for (int i = 0; i < eggsUpRight.Count; i++)
             {
-                if (eggsUpRight[i].y < Console.WindowHeight - 1)
+                if (eggsUpRight[i].y < Console.WindowHeight - 2)
                 {
                     eggsUpRight[i].x--;
                     eggsUpRight[i].y++;
@@ -303,7 +303,7 @@ class NuPagadi
             }
             for (int i = 0; i < eggsDownRight.Count; i++)
             {
-                if (eggsDownRight[i].y < Console.WindowHeight - 1)
+                if (eggsDownRight[i].y < Console.WindowHeight - 2)
                 {
                     eggsDownRight[i].x--;
                     eggsDownRight[i].y++;
