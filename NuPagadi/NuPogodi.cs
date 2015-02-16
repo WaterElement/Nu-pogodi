@@ -195,29 +195,29 @@ class NuPagadi
                     switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
                     {
                         case 1:
-                            newEgg.x = 20;
-                            newEgg.y = 5;
+                            newEgg.x = 7;
+                            newEgg.y = 10;
                             newEgg.z = "0";
                             newEgg.color = ConsoleColor.Gray;
                             eggsUpLeft.Add(newEgg);
                             break;
                         case 2:
-                            newEgg.x = 20;
-                            newEgg.y = 10;
+                            newEgg.x = 7;
+                            newEgg.y = 15;
                             newEgg.z = "0";
                             newEgg.color = ConsoleColor.Gray;
                             eggsDownLeft.Add(newEgg);
                             break;
                         case 3:
-                            newEgg.x = 60;
-                            newEgg.y = 5;
+                            newEgg.x = 69;
+                            newEgg.y = 10;
                             newEgg.z = "0";
                             newEgg.color = ConsoleColor.Gray;
                             eggsUpRight.Add(newEgg);
                             break;
                         case 4:
-                            newEgg.x = 60;
-                            newEgg.y = 10;
+                            newEgg.x = 69;
+                            newEgg.y = 15;
                             newEgg.z = "0";
                             newEgg.color = ConsoleColor.Gray;
                             eggsDownRight.Add(newEgg);
@@ -230,8 +230,11 @@ class NuPagadi
             //Move the eggs
             for (int i = 0; i < eggsUpLeft.Count; i++)
             {
-                eggsUpLeft[i].x++;
-                eggsUpLeft[i].y++;
+                if (eggsUpLeft[i].y < Console.WindowHeight - 1)
+                {
+                    eggsUpLeft[i].x++;
+                    eggsUpLeft[i].y++;
+                }
                 // Check for impact
                 if (eggsUpLeft[i].y > basketUpLevel)
                 {
@@ -252,8 +255,11 @@ class NuPagadi
             }
             for (int i = 0; i < eggsDownLeft.Count; i++)
             {
-                eggsDownLeft[i].x++;
-                eggsDownLeft[i].y++;
+                if (eggsDownLeft[i].y < Console.WindowHeight - 1)
+                {
+                    eggsDownLeft[i].x++;
+                    eggsDownLeft[i].y++;
+                }
                 if (eggsDownLeft[i].y > basketDownLevel)
                 {
                     //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
@@ -263,8 +269,11 @@ class NuPagadi
             }
             for (int i = 0; i < eggsUpRight.Count; i++)
             {
-                eggsUpRight[i].x--;
-                eggsUpRight[i].y++;
+                if (eggsUpRight[i].y < Console.WindowHeight - 1)
+                {
+                    eggsUpRight[i].x--;
+                    eggsUpRight[i].y++;
+                }
                 if (eggsUpRight[i].y > basketUpLevel)
                 {
                     //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
@@ -274,8 +283,11 @@ class NuPagadi
             }
             for (int i = 0; i < eggsDownRight.Count; i++)
             {
-                eggsDownRight[i].x--;
-                eggsDownRight[i].y++;
+                if (eggsDownRight[i].y < Console.WindowHeight - 1)
+                {
+                    eggsDownRight[i].x--;
+                    eggsDownRight[i].y++;
+                }
                 if (eggsDownRight[i].y > basketDownLevel)
                 {
                     //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
@@ -319,7 +331,6 @@ class NuPagadi
             }
             //End Orlin Sunday Morning
 
-            Console.SetCursorPosition(0, 0);
             DrawField(gameField);
 
             foreach (var egg in eggsUpLeft)
@@ -339,6 +350,7 @@ class NuPagadi
                 PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
             }
 
+            Console.SetCursorPosition(0, 0);
         }
 
 
