@@ -72,6 +72,20 @@ class NuPagadi
 
         PlaceWolf(env, positionX, positionY, "left");
     }
+    static void AddWolfLeftUp(char[,] env)
+    {
+        const int positionY = 13;
+        const int positionX = 13;
+
+        PlaceWolf(env, positionX, positionY, "leftup");
+    }
+    static void AddWolfRightUp(char[,] env)
+    {
+        const int positionY = 13;
+        const int positionX = 36;
+
+        PlaceWolf(env, positionX, positionY, "rightup");
+    }
     private static void PlaceWolf(char[,] env, int positionX, int positionY, string wolfPosition)
     {
         string fileName = String.Empty;
@@ -83,6 +97,12 @@ class NuPagadi
                 break;
             case "right":
                 fileName = "wolfright.txt";
+                break;
+            case "leftup":
+                fileName = "wolfleftup.txt";
+                break;
+            case "rightup":
+                fileName = "wolfrightup.txt";
                 break;
         }
 
@@ -318,15 +338,25 @@ class NuPagadi
             while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
-                if (pressedKey.Key == ConsoleKey.LeftArrow)
+                if (pressedKey.Key == ConsoleKey.NumPad4)
                 {
                     ResetEnvironment(gameField);
                     AddWolfLeft(gameField);
                 }
-                if (pressedKey.Key == ConsoleKey.RightArrow)
+                if (pressedKey.Key == ConsoleKey.NumPad7)
+                {
+                    ResetEnvironment(gameField);
+                    AddWolfLeftUp(gameField);
+                }
+                if (pressedKey.Key == ConsoleKey.NumPad6)
                 {
                     ResetEnvironment(gameField);
                     AddWolfRight(gameField);
+                }
+                if (pressedKey.Key == ConsoleKey.NumPad9)
+                {
+                    ResetEnvironment(gameField);
+                    AddWolfRightUp(gameField);
                 }
             }
             //End Orlin Sunday Morning
