@@ -195,14 +195,14 @@ class NuPagadi
                     switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
                     {
                         case 1:
-                            newEgg.x = 7;
+                            newEgg.x = 6;
                             newEgg.y = 10;
                             newEgg.z = "0";
                             newEgg.color = ConsoleColor.Gray;
                             eggsUpLeft.Add(newEgg);
                             break;
                         case 2:
-                            newEgg.x = 7;
+                            newEgg.x = 6;
                             newEgg.y = 15;
                             newEgg.z = "0";
                             newEgg.color = ConsoleColor.Gray;
@@ -350,7 +350,8 @@ class NuPagadi
                 PrintOnPosition(egg.x, egg.y, egg.z, egg.color);
             }
 
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
+
         }
 
 
