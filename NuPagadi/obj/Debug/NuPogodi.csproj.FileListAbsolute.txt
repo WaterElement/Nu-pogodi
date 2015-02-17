@@ -10,3 +10,9 @@ D:\Documents\Telerik 2015\Teamwork Nu Pogodi\Nu-pogodi\NuPagadi\obj\Debug\NuPaga
 D:\Documents\Telerik 2015\Teamwork Nu Pogodi\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe
 D:\Documents\Telerik 2015\Teamwork Nu Pogodi\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.pdb
 D:\Documents\Telerik 2015\Teamwork Nu Pogodi\Nu-pogodi\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache
+C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\bin\Debug\NuPagadi.exe.config
+C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\obj\Debug\NuPagadi.exe
+C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\obj\Debug\NuPagadi.pdb
+C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\bin\Debug\NuPagadi.exe
+C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\bin\Debug\NuPagadi.pdb
+C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache

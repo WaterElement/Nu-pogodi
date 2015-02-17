@@ -159,6 +159,8 @@ class NuPagadi
         //End Orlin Sunday morning edits
 
 
+        
+
 
         //Console.BufferHeight = 100;
         //Console.BufferWidth = 200;
@@ -184,20 +186,28 @@ class NuPagadi
 
         while (true)
         {
+            int scoreCatchedEgg = 0;
+            PrintScore(scoreCatchedEgg);
 
             //Orlin
-
-
-            Thread.Sleep(100);
+            double sleepTime = 500; // eggs moving slower then faster --> stella
+            sleepTime -= 0.05;
+            Thread.Sleep((int)sleepTime);
             Console.Clear();
 
 
             //End Orlin
 
-
+           
 
             // GAME START SCREEN
             //Draw the field - from txt file
+
+            
+
+
+          
+
 
 
             //Draw the eggs
@@ -205,7 +215,7 @@ class NuPagadi
             {
                 Egg newEgg = new Egg();
                 int chance = randomGenerator.Next(0, 100);
-                if (chance < 60)
+                if (chance < 80)
                 {
 
                 }
@@ -282,6 +292,8 @@ class NuPagadi
                 }
                 if (eggsDownLeft[i].y > basketDownLevel)
                 {
+
+                
                     //PrintStringOnPosition(8, 5, "GAME OVER!", ConsoleColor.DarkRed);
                     //Console.WriteLine();
                     //Environment.Exit(0);
@@ -315,6 +327,12 @@ class NuPagadi
                     //Environment.Exit(0);
                 }
             }
+
+
+
+            
+
+
             //Clear the console
             //Console.Clear();
             //Redraw playfield
@@ -335,6 +353,7 @@ class NuPagadi
 
             //Orlin Sunday Morning
 
+
             while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
@@ -347,6 +366,8 @@ class NuPagadi
                 {
                     ResetEnvironment(gameField);
                     AddWolfLeftUp(gameField);
+
+
                 }
                 if (pressedKey.Key == ConsoleKey.NumPad6)
                 {
@@ -360,6 +381,8 @@ class NuPagadi
                 }
             }
             //End Orlin Sunday Morning
+
+
 
             DrawField(gameField);
 
@@ -382,14 +405,24 @@ class NuPagadi
 
             Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
 
+           
         }
 
 
-
+        
 
 
         //proba stella
 
         //test Orlin
     }
+
+    static void PrintScore(int score)
+    {
+        Console.SetCursorPosition(Console.WindowWidth / 2+20, 0);
+        Console.WriteLine("score: "+score);
+
+    }
+
+    
 }
