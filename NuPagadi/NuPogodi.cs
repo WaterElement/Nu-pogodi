@@ -144,14 +144,15 @@ class NuPagadi
     }
     static void Main()
     {
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
         //Orlin Sunday morning edits
 
         int gameFildWidth = 76;
         int gameFieldHeight = 31;
         char[,] gameField = new char[gameFieldHeight, gameFildWidth];
 
-        Console.SetWindowSize(gameFildWidth+1, gameFieldHeight+1); //set console window size
-        Console.SetBufferSize(gameFildWidth+1, gameFieldHeight+1); //removes the scroll bars if equal to window size
+        Console.SetWindowSize(gameFildWidth + 1, gameFieldHeight + 1); //set console window size
+        Console.SetBufferSize(gameFildWidth + 1, gameFieldHeight + 1); //removes the scroll bars if equal to window size
         Console.CursorVisible = false;
         ResetEnvironment(gameField);
         AddWolfRight(gameField);
@@ -161,7 +162,7 @@ class NuPagadi
         //End Orlin Sunday morning edits
 
 
-        
+
 
 
         //Console.BufferHeight = 100;
@@ -173,11 +174,12 @@ class NuPagadi
         int basketUpLevel = 19;         // this depends on pressed key up ot down
         int basketDownLevel = 24;         // this depends on pressed key up ot down       
         string basketPosition = "down right"; // this depends on pressed key left ot rignht
-        int lives = 5;
+        List<char> lives = new List<char>{'\u2665','\u2665','\u2665','\u2665','\u2665'};
+        int livesCount = 5;
         double speed = 0;
         double maxSpeed = 400;
         int score = 0;
-        
+
 
 
         Random randomGenerator = new Random();
@@ -190,12 +192,12 @@ class NuPagadi
 
         while (true)
         {
-            int scoreCatchedEgg = 0;
-            PrintScore(scoreCatchedEgg);
 
+            PrintScore(score);
+            PrintLives(lives);
             //Orlin
             //Orlin
-            double sleepTime = 500; // eggs moving slower then faster --> stella
+            double sleepTime = 1000; // eggs moving slower then faster --> stella
             sleepTime -= 0.05;
             Thread.Sleep((int)sleepTime);
             Console.Clear();
@@ -204,15 +206,15 @@ class NuPagadi
             bool eggSmashRight = false;
             //End Orlin
 
-           
+
 
             // GAME START SCREEN
             //Draw the field - from txt file
 
-            
 
 
-          
+
+
 
 
 
@@ -223,241 +225,268 @@ class NuPagadi
                 int chance = randomGenerator.Next(0, 100);
                 if (chance < 80)
                 {
-                //if (chance < 80)
+                    //if (chance < 80)
+                    //{
+
+                    //}
+                    if (chance < 20)
+                    {
+                        int eggLine = randomGenerator.Next(1, 5);
+                        switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
+                        {
+                            case 1:
+                                newEgg.x = 6;
+                                newEgg.y = 10;
+                                newEgg.z = "0";
+                                newEgg.color = ConsoleColor.Gray;
+                                eggsUpLeft.Add(newEgg);
+                                break;
+                            case 2:
+                                newEgg.x = 6;
+                                newEgg.y = 15;
+                                newEgg.z = "0";
+                                newEgg.color = ConsoleColor.Gray;
+                                eggsDownLeft.Add(newEgg);
+                                break;
+                            case 3:
+                                newEgg.x = 69;
+                                newEgg.y = 10;
+                                newEgg.z = "0";
+                                newEgg.color = ConsoleColor.Gray;
+                                eggsUpRight.Add(newEgg);
+                                break;
+                            case 4:
+                                newEgg.x = 69;
+                                newEgg.y = 15;
+                                newEgg.z = "0";
+                                newEgg.color = ConsoleColor.Gray;
+                                eggsDownRight.Add(newEgg);
+                                break;
+                        }
+                    }
+                }
+
+                //Move the eggs
+                for (int j = 0; j < eggsUpLeft.Count; j++)
+                {
+                    if (eggsUpLeft[j].y < basketUpLevel - 1)
+                    {
+                        eggsUpLeft[j].x++;
+                        eggsUpLeft[j].y++;
+                    }
+                    // Check for impact
+                    else if (eggsUpLeft[j].y <= basketUpLevel)
+                    {
+                        if (basketPosition == "up left")
+                        {
+                            score++;
+                            eggsUpLeft.Remove(eggsUpLeft[j]);
+                        }
+                        else
+                        {
+                            eggSmashLeft = true;
+                            livesCount--;
+                            if (livesCount == 0)
+                            {
+                                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+                                Console.WriteLine("GAME OVER");
+                                return;
+                            }
+                            
+                            eggsUpLeft.Remove(eggsUpLeft[j]);
+                        }
+
+                    }
+                }
+                for (int k = 0; k < eggsDownLeft.Count; k++)
+                {
+                    if (eggsDownLeft[k].y < basketDownLevel - 1)
+                    {
+                        eggsDownLeft[k].x++;
+                        eggsDownLeft[k].y++;
+                    }
+                    else if (eggsDownLeft[k].y <= basketDownLevel)
+                    {
+                        if (basketPosition == "down left")
+                        {
+                            score++;
+                            eggsDownLeft.Remove(eggsDownLeft[k]);
+                        }
+                        else
+                        {
+                            eggSmashLeft = true;
+                            livesCount--;
+                            if (livesCount == 0)
+                            {
+                                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+                                Console.WriteLine("GAME OVER");
+                                return;
+                            }
+                            lives.RemoveAt(livesCount);
+                            
+                            eggsDownLeft.Remove(eggsDownLeft[k]);
+                        }
+                    }
+                }
+                for (int l = 0; l < eggsUpRight.Count; l++)
+                {
+                    if (eggsUpRight[l].y < basketUpLevel - 1)
+                    {
+                        eggsUpRight[l].x--;
+                        eggsUpRight[l].y++;
+                    }
+                    else if (eggsUpRight[l].y <= basketUpLevel)
+                    {
+                        if (basketPosition == "up right")
+                        {
+                            score++;
+                            eggsUpRight.Remove(eggsUpRight[l]);
+                        }
+                        else
+                        {
+                            eggSmashRight = true;
+                            livesCount--;
+                            if (livesCount == 0) { Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2); 
+                                                   Console.WriteLine("GAME OVER");
+                                                   return; }
+                            lives.RemoveAt(livesCount);
+                            
+                            eggsUpRight.Remove(eggsUpRight[l]);
+                        }
+                    }
+                }
+                for (int m = 0; m < eggsDownRight.Count; m++)
+                {
+                    if (eggsDownRight[m].y < basketDownLevel - 1)
+                    {
+                        eggsDownRight[m].x--;
+                        eggsDownRight[m].y++;
+                    }
+                    else if (eggsDownRight[m].y <= basketDownLevel)
+                    {
+                        if (basketPosition == "down right")
+                        {
+                            score++;
+                            eggsDownRight.Remove(eggsDownRight[m]);
+                        }
+                        else
+                        {
+                            eggSmashRight = true;
+                            livesCount--;
+                            if (livesCount == 0)
+                            {
+                                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
+                                Console.WriteLine("GAME OVER");
+                                return;
+                            }
+                            lives.RemoveAt(livesCount);
+                            
+                            eggsDownRight.Remove(eggsDownRight[m]);
+                        }
+                    }
+                }
+
+               
+
+
+
+                //Clear the console
+                //Console.Clear();
+                //Redraw playfield
+
+                //Move the wolf
+                //Scoring system
+                //Slow down program
+
+                //Thread.Sleep((int)(400 - speed));
+                //if (score % 20 == 0 && score != 0)
                 //{
-
+                //    speed += 10;
+                //    if (speed > maxSpeed)
+                //    {
+                //        speed = maxSpeed;
+                //    }
                 //}
-                if (chance < 20)
-                {
-                    int eggLine = randomGenerator.Next(1, 5);
-                    switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
-                    {
-                        case 1:
-                            newEgg.x = 6;
-                            newEgg.y = 10;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsUpLeft.Add(newEgg);
-                            break;
-                        case 2:
-                            newEgg.x = 6;
-                            newEgg.y = 15;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsDownLeft.Add(newEgg);
-                            break;
-                        case 3:
-                            newEgg.x = 69;
-                            newEgg.y = 10;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsUpRight.Add(newEgg);
-                            break;
-                        case 4:
-                            newEgg.x = 69;
-                            newEgg.y = 15;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsDownRight.Add(newEgg);
-                            break;
-                    }
-                }
-            }
 
-            //Move the eggs
-            for (int i = 0; i < eggsUpLeft.Count; i++)
-            {
-                if (eggsUpLeft[i].y < basketUpLevel - 1)
+                //Orlin Sunday Morning
+
+
+                while (Console.KeyAvailable)
                 {
-                    eggsUpLeft[i].x++;
-                    eggsUpLeft[i].y++;
-                }
-                // Check for impact
-                else if (eggsUpLeft[i].y <= basketUpLevel)
-                {
-                    if (basketPosition == "up left")
+                    ConsoleKeyInfo pressedKey = Console.ReadKey();
+                    if (pressedKey.Key == ConsoleKey.NumPad4)
                     {
-                        score++;
-                        eggsUpLeft.Remove(eggsUpLeft[i]);
+                        basketPosition = "down left";
+                        ResetEnvironment(gameField);
+                        AddWolfLeft(gameField);
                     }
-                    else
+                    if (pressedKey.Key == ConsoleKey.NumPad7)
                     {
-                        eggSmashLeft = true;
-                        lives--;
-                        eggsUpLeft.Remove(eggsUpLeft[i]);
+                        basketPosition = "up left";
+                        ResetEnvironment(gameField);
+                        AddWolfLeftUp(gameField);
+
+
+                    }
+                    if (pressedKey.Key == ConsoleKey.NumPad6)
+                    {
+                        basketPosition = "down right";
+                        ResetEnvironment(gameField);
+                        AddWolfRight(gameField);
+                    }
+                    if (pressedKey.Key == ConsoleKey.NumPad9)
+                    {
+                        basketPosition = "up right";
+                        ResetEnvironment(gameField);
+                        AddWolfRightUp(gameField);
+                    }
+                }
+                //End Orlin Sunday Morning
+
+
+
+                DrawField(gameField);
+
+                if (eggSmashLeft || eggSmashRight)
+                {
+                    if (eggSmashLeft)
+                    {
+                        PrintOnPosition(13, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
+                    }
+                    if (eggSmashRight)
+                    {
+                        PrintOnPosition(60, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
                     }
 
+                    eggsUpLeft.Clear();
+                    eggsDownLeft.Clear();
+                    eggsUpRight.Clear();
+                    eggsDownRight.Clear();
                 }
-            }
-            for (int i = 0; i < eggsDownLeft.Count; i++)
-            {
-                if (eggsDownLeft[i].y < basketDownLevel - 1)
+                else
                 {
-                    eggsDownLeft[i].x++;
-                    eggsDownLeft[i].y++;
+                    PrintEggs(eggsUpLeft);
+                    PrintEggs(eggsDownLeft);
+                    PrintEggs(eggsUpRight);
+                    PrintEggs(eggsDownRight);
                 }
-                else if (eggsDownLeft[i].y <= basketDownLevel)
-                {
-                    if (basketPosition == "down left")
-                    {
-                        score++;
-                        eggsDownLeft.Remove(eggsDownLeft[i]);
-                    }
-                    else
-                    {
-                        eggSmashLeft = true;
-                        lives--;
-                        eggsDownLeft.Remove(eggsDownLeft[i]);
-                    }
-                }
-            }
-            for (int i = 0; i < eggsUpRight.Count; i++)
-            {
-                if (eggsUpRight[i].y < basketUpLevel - 1)
-                {
-                    eggsUpRight[i].x--;
-                    eggsUpRight[i].y++;
-                }
-                else if (eggsUpRight[i].y <= basketUpLevel)
-                {
-                    if (basketPosition == "up right")
-                    {
-                        score++;
-                        eggsUpRight.Remove(eggsUpRight[i]);
-                    }
-                    else
-                    {
-                        eggSmashRight = true;
-                        lives--;
-                        eggsUpRight.Remove(eggsUpRight[i]);
-                    }
-                }
-            }
-            for (int i = 0; i < eggsDownRight.Count; i++)
-            {
-                if (eggsDownRight[i].y < basketDownLevel - 1)
-                {
-                    eggsDownRight[i].x--;
-                    eggsDownRight[i].y++;
-                }
-                else if (eggsDownRight[i].y <= basketDownLevel)
-                {
-                    if (basketPosition == "down right")
-                    {
-                        score++;
-                        eggsDownRight.Remove(eggsDownRight[i]);
-                    }
-                    else
-                    {
-                        eggSmashRight = true;
-                        lives--;
-                        eggsDownRight.Remove(eggsDownRight[i]);
-                    }
-                }
+
+
+                Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
+                Console.ForegroundColor = ConsoleColor.Gray;
+
+
             }
 
 
 
-            
 
 
-            //Clear the console
-            //Console.Clear();
-            //Redraw playfield
+            //proba stella
 
-            //Move the wolf
-            //Scoring system
-            //Slow down program
-
-            //Thread.Sleep((int)(400 - speed));
-            //if (score % 20 == 0 && score != 0)
-            //{
-            //    speed += 10;
-            //    if (speed > maxSpeed)
-            //    {
-            //        speed = maxSpeed;
-            //    }
-            //}
-
-            //Orlin Sunday Morning
-
-
-            while (Console.KeyAvailable)
-            {
-                ConsoleKeyInfo pressedKey = Console.ReadKey();
-                if (pressedKey.Key == ConsoleKey.NumPad4)
-                {
-                    basketPosition = "down left";
-                    ResetEnvironment(gameField);
-                    AddWolfLeft(gameField);
-                }
-                if (pressedKey.Key == ConsoleKey.NumPad7)
-                {
-                    basketPosition = "up left";
-                    ResetEnvironment(gameField);
-                    AddWolfLeftUp(gameField);
-
-
-                }
-                if (pressedKey.Key == ConsoleKey.NumPad6)
-                {
-                    basketPosition = "down right";
-                    ResetEnvironment(gameField);
-                    AddWolfRight(gameField);
-                }
-                if (pressedKey.Key == ConsoleKey.NumPad9)
-                {
-                    basketPosition = "up right";
-                    ResetEnvironment(gameField);
-                    AddWolfRightUp(gameField);
-                }
-            }
-            //End Orlin Sunday Morning
-
-
-
-            DrawField(gameField);
-
-            if (eggSmashLeft || eggSmashRight)
-            {
-                if (eggSmashLeft)
-                {
-                    PrintOnPosition(13, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
-                }
-                if (eggSmashRight)
-                {
-                    PrintOnPosition(60, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
-                }
-
-                eggsUpLeft.Clear();
-                eggsDownLeft.Clear();
-                eggsUpRight.Clear();
-                eggsDownRight.Clear();
-            }
-            else
-            {
-                PrintEggs(eggsUpLeft);
-                PrintEggs(eggsDownLeft);
-                PrintEggs(eggsUpRight);
-                PrintEggs(eggsDownRight);
-            }
-
-
-            Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-           
+            //test Orlin
         }
-
-
-        
-
-
-        //proba stella
-
-        //test Orlin
     }
-
     private static void PrintEggs(List<Egg> eggsList)
     {
         foreach (var egg in eggsList)
@@ -469,9 +498,18 @@ class NuPagadi
     static void PrintScore(int score)
     {
         Console.SetCursorPosition(Console.WindowWidth / 2+20, 0);
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("score: "+score);
 
     }
-
+    static void PrintLives(List<char> lives)
+    {
+        Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        for (int i = 0; i < lives.Count; i++)
+        {
+            Console.Write(lives[i]);
+        }
+    }
     
 }
