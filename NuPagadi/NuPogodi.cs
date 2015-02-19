@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -144,6 +145,7 @@ class NuPagadi
     }
     static void Main()
     {
+        Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         //Orlin Sunday morning edits
 
@@ -198,8 +200,9 @@ class NuPagadi
             //Orlin
             //Orlin
             double sleepTime = 1000; // eggs moving slower then faster --> stella
-            sleepTime -= 0.05;
-            Thread.Sleep((int)sleepTime);
+            //sleepTime -= 0.05;
+            //Thread.Sleep((int)sleepTime);
+            GameSpeed(score, sleepTime, speed, maxSpeed);  // Plamen
             Console.Clear();
 
             bool eggSmashLeft = false;
@@ -510,6 +513,20 @@ class NuPagadi
         {
             Console.Write(lives[i]);
         }
+    }
+
+    static void GameSpeed(int score, double sleepTime, double speed, double maxSpeed)
+    {
+        if (score % 20 == 0 && score != 0)
+        {
+            speed += 10;
+            if (speed> maxSpeed)
+            {
+                speed = maxSpeed;
+            }
+        }
+
+        Thread.Sleep((int)(sleepTime - speed));
     }
     
 }

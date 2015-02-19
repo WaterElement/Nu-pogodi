@@ -16,3 +16,8 @@ C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\obj\Debug\NuPagadi.pdb
 C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\bin\Debug\NuPagadi.exe
 C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\bin\Debug\NuPagadi.pdb
 C:\Users\Nitro\Documents\GitHub\WE\Nu-pagadi\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache
+C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe.config
+C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.exe
+C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.pdb
+C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe
+C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.pdb
