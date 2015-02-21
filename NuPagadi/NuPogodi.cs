@@ -177,6 +177,7 @@ class NuPagadi
         Console.SetCursorPosition(Console.WindowWidth / 2 + 20, 0);
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("score: " + score);
+        Console.ForegroundColor = ConsoleColor.Gray;
     }
 
     static void PrintLives(List<char> lives) // insteed of this we can use PrintOnPosition
@@ -234,7 +235,7 @@ class NuPagadi
 
         PrintOnPosition(Console.WindowWidth / 2 - 10,
                Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
-        ConsoleKeyInfo keyInfo = Console.ReadKey();
+        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
         if (keyInfo.Key == ConsoleKey.Enter)
         {
             while (true)
@@ -465,7 +466,14 @@ class NuPagadi
                     ConsoleKeyInfo pressedKey = Console.ReadKey(true);
                     if (pressedKey.Key == ConsoleKey.Spacebar)
                     {
-                        
+                        DrawField(gameField);
+                        PrintEggs(eggsUpLeft);
+                        PrintEggs(eggsDownLeft);
+                        PrintEggs(eggsUpRight);
+                        PrintEggs(eggsDownRight);
+                        PrintLives(lives);
+                        PrintScore(score);
+                        pressedKey = Console.ReadKey(true);
                     }
                     if (pressedKey.Key == ConsoleKey.NumPad4)
                     {
