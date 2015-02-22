@@ -16,7 +16,7 @@ class NuPagadi
 {
     private static void DrawField(char[,] gameField)
     {
-
+        
         for (int i = 0; i < gameField.GetLength(0); i++)
         {
             StringBuilder field = new StringBuilder();
@@ -207,6 +207,8 @@ class NuPagadi
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         //Orlin Sunday morning edits
 
+        Console.Title = "Nu Pogodi";//Teodora
+
         int gameFildWidth = 76;
         int gameFieldHeight = 31;
         char[,] gameField = new char[gameFieldHeight, gameFildWidth];
@@ -242,8 +244,9 @@ class NuPagadi
             {
                 PrintScore(score);
                 PrintLives(lives);
-                Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);             
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+
                 //Orlin
                 //Orlin
                 double sleepTime = 1000; // eggs moving slower then faster --> stella
@@ -360,7 +363,7 @@ class NuPagadi
                             eggSmashLeft = true;
                             livesCount--;
                             LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-
+                            Console.Beep();
                             lives.RemoveAt(livesCount - 1);
                             eggsUpLeft.Clear();
                         }
@@ -392,6 +395,7 @@ class NuPagadi
                             eggSmashLeft = true;
                             livesCount--;
                             LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            Console.Beep();
                             lives.RemoveAt(livesCount - 1);
                             eggsDownLeft.Clear();
                         }
@@ -422,6 +426,7 @@ class NuPagadi
                             eggSmashRight = true;
                             livesCount--;
                             LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            Console.Beep();
                             lives.RemoveAt(livesCount - 1);
                             eggsUpRight.Clear();
                         }
@@ -452,6 +457,7 @@ class NuPagadi
                             eggSmashRight = true;
                             livesCount--;
                             LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            Console.Beep();
                             lives.RemoveAt(livesCount - 1);
                             eggsDownRight.Clear();
                         }

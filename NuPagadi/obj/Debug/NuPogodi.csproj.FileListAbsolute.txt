@@ -21,3 +21,9 @@ C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.exe
 C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.pdb
 C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe
 C:\Users\Plamen\Desktop\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.pdb
+E:\Telerik\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe.config
+E:\Telerik\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.exe
+E:\Telerik\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.pdb
+E:\Telerik\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe
+E:\Telerik\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.pdb
+E:\Telerik\Nu-pogodi\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache
