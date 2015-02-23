@@ -201,6 +201,47 @@ class NuPagadi
         Console.Write(c);
     }
 
+    static void ClearEggs()
+    {
+        eggsDownLeft.Clear();
+        eggsDownRight.Clear();
+        eggsUpLeft.Clear();
+        eggsUpRight.Clear();
+    }
+
+    static void UpdateSpeed()
+    {
+        if (score < 15)
+        {
+            maxTicks = 3;
+        }
+        else if (score >= 15 && score < 30)
+        {
+            maxTicks = 2;
+        }
+        else if (score >= 30 && score < 45)
+        {
+            maxTicks = 1;
+        }
+        else //(score >= 45)
+        {
+            maxTicks = 0;
+        }
+    }
+
+    static int score = 0;
+    static Random randomGenerator = new Random();
+    static List<Egg> eggsUpLeft = new List<Egg>();
+    static List<Egg> eggsDownLeft = new List<Egg>();
+    static List<Egg> eggsUpRight = new List<Egg>();
+    static List<Egg> eggsDownRight = new List<Egg>();
+
+    static int ticks = 0;
+    static int maxTicks = 3;
+
+
+
+
     static void Main()
     {
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
@@ -226,33 +267,49 @@ class NuPagadi
         int livesCount = lives.Count;
         double speed = 0;
         double maxSpeed = 400;
-        int score = 0;
 
-        Random randomGenerator = new Random();
 
-        List<Egg> eggsUpLeft = new List<Egg>();
-        List<Egg> eggsDownLeft = new List<Egg>();
-        List<Egg> eggsUpRight = new List<Egg>();
-        List<Egg> eggsDownRight = new List<Egg>();
+        Console.BackgroundColor = ConsoleColor.White;
 
         PrintOnPosition(Console.WindowWidth / 2 - 10,
                Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+        UpdateSpeed();
+
         if (keyInfo.Key == ConsoleKey.Enter)
         {
             while (true)
             {
+                UpdateSpeed();
+
+                if (ticks < maxTicks)
+                {
+                    ticks++;
+                }
+                else
+                {
+                    ticks = 0;
+                }
+
                 PrintScore(score);
                 PrintLives(lives);
                 Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                //Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+                Console.ForegroundColor = ConsoleColor.Black;
+
 
                 //Orlin
                 //Orlin
                 double sleepTime = 1000; // eggs moving slower then faster --> stella
                 //sleepTime -= 0.05;
                 //Thread.Sleep((int)sleepTime);
-                GameSpeed(score, sleepTime, speed, maxSpeed);  // Plamen
+                Thread.Sleep(200);
+
+                //GameSpeed(score, sleepTime, speed, maxSpeed);  // Plamen
+
+
                 Console.Clear();
 
                 bool eggSmashLeft = false;
@@ -263,211 +320,222 @@ class NuPagadi
                 //Milko
                 //Draw the eggs
 
-                Egg newEgg = new Egg();
-                int chance = randomGenerator.Next(0, 100);
-                if (chance < 8)                                 //Golden Eggs - life++ ; score +9;
+                if (ticks == maxTicks)
                 {
-                    int eggLine = randomGenerator.Next(1, 5);
-                    switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
-                    {
-                        case 1:
-                            newEgg.x = 6;
-                            newEgg.y = 10;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.DarkYellow;
-                            eggsUpLeft.Add(newEgg);
-                            break;
-                        case 2:
-                            newEgg.x = 6;
-                            newEgg.y = 15;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.DarkYellow;
-                            eggsDownLeft.Add(newEgg);
-                            break;
-                        case 3:
-                            newEgg.x = 69;
-                            newEgg.y = 10;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.DarkYellow;
-                            eggsUpRight.Add(newEgg);
-                            break;
-                        case 4:
-                            newEgg.x = 69;
-                            newEgg.y = 15;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.DarkYellow;
-                            eggsDownRight.Add(newEgg);
-                            break;
-                    }
-                }
 
-                else if (chance < 20)
-                {
-                    int eggLine = randomGenerator.Next(1, 5);
-                    switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
+                    Egg newEgg = new Egg();
+                    int chance = randomGenerator.Next(0, 100);
+                    if (chance < 5)                                 //Golden Eggs - life++ ; score +9;
                     {
-                        case 1:
-                            newEgg.x = 6;
-                            newEgg.y = 10;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsUpLeft.Add(newEgg);
-                            break;
-                        case 2:
-                            newEgg.x = 6;
-                            newEgg.y = 15;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsDownLeft.Add(newEgg);
-                            break;
-                        case 3:
-                            newEgg.x = 69;
-                            newEgg.y = 10;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsUpRight.Add(newEgg);
-                            break;
-                        case 4:
-                            newEgg.x = 69;
-                            newEgg.y = 15;
-                            newEgg.z = "0";
-                            newEgg.color = ConsoleColor.Gray;
-                            eggsDownRight.Add(newEgg);
-                            break;
+                        int eggLine = randomGenerator.Next(1, 5);
+                        switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
+                        {
+                            case 1:
+                                newEgg.x = 6;
+                                newEgg.y = 10;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkYellow;
+                                eggsUpLeft.Add(newEgg);
+                                break;
+                            case 2:
+                                newEgg.x = 6;
+                                newEgg.y = 15;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkYellow;
+                                eggsDownLeft.Add(newEgg);
+                                break;
+                            case 3:
+                                newEgg.x = 69;
+                                newEgg.y = 10;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkYellow;
+                                eggsUpRight.Add(newEgg);
+                                break;
+                            case 4:
+                                newEgg.x = 69;
+                                newEgg.y = 15;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkYellow;
+                                eggsDownRight.Add(newEgg);
+                                break;
+                        }
+                    }
+                    else if (chance < 20)
+                    {
+                        int eggLine = randomGenerator.Next(1, 5);
+                        switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
+                        {
+                            case 1:
+                                newEgg.x = 6;
+                                newEgg.y = 10;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkGray;
+                                eggsUpLeft.Add(newEgg);
+                                break;
+                            case 2:
+                                newEgg.x = 6;
+                                newEgg.y = 15;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkGray;
+                                eggsDownLeft.Add(newEgg);
+                                break;
+                            case 3:
+                                newEgg.x = 69;
+                                newEgg.y = 10;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkGray;
+                                eggsUpRight.Add(newEgg);
+                                break;
+                            case 4:
+                                newEgg.x = 69;
+                                newEgg.y = 15;
+                                newEgg.z = "O";
+                                newEgg.color = ConsoleColor.DarkGray;
+                                eggsDownRight.Add(newEgg);
+                                break;
+                        }
                     }
                 }
 
                 //Move the eggs
-                for (int j = 0; j < eggsUpLeft.Count; j++)
+                if (ticks == maxTicks)
                 {
-                    if (eggsUpLeft[j].y < basketUpLevel - 1)
+                    for (int j = 0; j < eggsUpLeft.Count; j++)
                     {
-                        eggsUpLeft[j].x++;
-                        eggsUpLeft[j].y++;
-                    }
-                    // Check for impact
-                    else if (eggsUpLeft[j].y <= basketUpLevel)
-                    {
-                        if (basketPosition == "up left")
+                        if (eggsUpLeft[j].y < basketUpLevel - 1)
                         {
-                            if (eggsUpLeft[j].color == ConsoleColor.DarkYellow && livesCount < 5)
+                            eggsUpLeft[j].x++;
+                            eggsUpLeft[j].y++;
+                        }
+                        // Check for impact
+                        else if (eggsUpLeft[j].y <= basketUpLevel)
+                        {
+                            if (basketPosition == "up left")
                             {
-                                goldEgg = true;
-                                //livesCount++;
-                                //lives.Add('\u2665');
-                                //score += 9;
+                                if (eggsUpLeft[j].color == ConsoleColor.DarkYellow && livesCount < 5)
+                                {
+                                    goldEgg = true;
+                                    //livesCount++;
+                                    //lives.Add('\u2665');
+                                    //score += 9;
+                                }
+                                score++;
+                                eggsUpLeft.Remove(eggsUpLeft[j]);
                             }
-                            score++;
-                            eggsUpLeft.Remove(eggsUpLeft[j]);
-                        }
-                        else
-                        {
-                            eggSmashLeft = true;
-                            //livesCount--;
-                            //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            ////Console.Beep();
-                            //lives.RemoveAt(livesCount - 1);
-                            eggsUpLeft.Clear();
-                        }
+                            else
+                            {
+                                eggSmashLeft = true;
+                                //livesCount--;
+                                //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                                ////Console.Beep();
+                                //lives.RemoveAt(livesCount - 1);
+                                //eggsUpLeft.Clear();
+                                ClearEggs();
+                            }
 
+                        }
                     }
-                }
-                for (int k = 0; k < eggsDownLeft.Count; k++)
-                {
-                    if (eggsDownLeft[k].y < basketDownLevel - 1)
+                    for (int k = 0; k < eggsDownLeft.Count; k++)
                     {
-                        eggsDownLeft[k].x++;
-                        eggsDownLeft[k].y++;
-                    }
-                    else if (eggsDownLeft[k].y <= basketDownLevel)
-                    {
-                        if (basketPosition == "down left")
+                        if (eggsDownLeft[k].y < basketDownLevel - 1)
                         {
-                            if (eggsDownLeft[k].color == ConsoleColor.DarkYellow && livesCount < 5)
+                            eggsDownLeft[k].x++;
+                            eggsDownLeft[k].y++;
+                        }
+                        else if (eggsDownLeft[k].y <= basketDownLevel)
+                        {
+                            if (basketPosition == "down left")
                             {
-                                goldEgg = true;
-                                //livesCount++;
-                                //lives.Add('\u2665');
-                                //score += 9;
+                                if (eggsDownLeft[k].color == ConsoleColor.DarkYellow && livesCount < 5)
+                                {
+                                    goldEgg = true;
+                                    //livesCount++;
+                                    //lives.Add('\u2665');
+                                    //score += 9;
+                                }
+                                score++;
+                                eggsDownLeft.Remove(eggsDownLeft[k]);
                             }
-                            score++;
-                            eggsDownLeft.Remove(eggsDownLeft[k]);
-                        }
-                        else
-                        {
-                            eggSmashLeft = true;
-                            // livesCount--;
-                            // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            //// Console.Beep();
-                            // lives.RemoveAt(livesCount - 1);
-                            eggsDownLeft.Clear();
-                        }
-                    }
-                }
-                for (int l = 0; l < eggsUpRight.Count; l++)
-                {
-                    if (eggsUpRight[l].y < basketUpLevel - 1)
-                    {
-                        eggsUpRight[l].x--;
-                        eggsUpRight[l].y++;
-                    }
-                    else if (eggsUpRight[l].y <= basketUpLevel)
-                    {
-                        if (basketPosition == "up right")
-                        {
-                            if (eggsUpRight[l].color == ConsoleColor.DarkYellow && livesCount < 5)
+                            else
                             {
-                                goldEgg = true;
-                                //livesCount++;
-                                //lives.Add('\u2665');
-                                //score += 9;
+                                eggSmashLeft = true;
+                                // livesCount--;
+                                // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                                //// Console.Beep();
+                                // lives.RemoveAt(livesCount - 1);
+                                //eggsDownLeft.Clear();
+                                ClearEggs();
                             }
-                            score++;
-                            eggsUpRight.Remove(eggsUpRight[l]);
-                        }
-                        else
-                        {
-                            eggSmashRight = true;
-                            // livesCount--;
-                            // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            //// Console.Beep();
-                            // lives.RemoveAt(livesCount - 1);
-                            eggsUpRight.Clear();
                         }
                     }
-                }
-                for (int m = 0; m < eggsDownRight.Count; m++)
-                {
-                    if (eggsDownRight[m].y < basketDownLevel - 1)
+                    for (int l = 0; l < eggsUpRight.Count; l++)
                     {
-                        eggsDownRight[m].x--;
-                        eggsDownRight[m].y++;
-                    }
-                    else if (eggsDownRight[m].y <= basketDownLevel)
-                    {
-                        if (basketPosition == "down right")
+                        if (eggsUpRight[l].y < basketUpLevel - 1)
                         {
-                            if (eggsDownRight[m].color == ConsoleColor.DarkYellow && livesCount < 5)
+                            eggsUpRight[l].x--;
+                            eggsUpRight[l].y++;
+                        }
+                        else if (eggsUpRight[l].y <= basketUpLevel)
+                        {
+                            if (basketPosition == "up right")
                             {
-                                goldEgg = true;
-                                //livesCount++;
-                                //lives.Add('\u2665');
-                                //score += 9;
+                                if (eggsUpRight[l].color == ConsoleColor.DarkYellow && livesCount < 5)
+                                {
+                                    goldEgg = true;
+                                    //livesCount++;
+                                    //lives.Add('\u2665');
+                                    //score += 9;
+                                }
+                                score++;
+                                eggsUpRight.Remove(eggsUpRight[l]);
                             }
-                            score++;
-                            eggsDownRight.Remove(eggsDownRight[m]);
+                            else
+                            {
+                                eggSmashRight = true;
+                                // livesCount--;
+                                // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                                //// Console.Beep();
+                                // lives.RemoveAt(livesCount - 1);
+                                //eggsUpRight.Clear();
+                                ClearEggs();
+                            }
                         }
-                        else
+                    }
+                    for (int m = 0; m < eggsDownRight.Count; m++)
+                    {
+                        if (eggsDownRight[m].y < basketDownLevel - 1)
                         {
-                            eggSmashRight = true;
-                            //livesCount--;
-                            //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            ////Console.Beep();
-                            //lives.RemoveAt(livesCount - 1);
-                            eggsDownRight.Clear();
+                            eggsDownRight[m].x--;
+                            eggsDownRight[m].y++;
+                        }
+                        else if (eggsDownRight[m].y <= basketDownLevel)
+                        {
+                            if (basketPosition == "down right")
+                            {
+                                if (eggsDownRight[m].color == ConsoleColor.DarkYellow && livesCount < 5)
+                                {
+                                    goldEgg = true;
+                                    //livesCount++;
+                                    //lives.Add('\u2665');
+                                    //score += 9;
+                                }
+                                score++;
+                                eggsDownRight.Remove(eggsDownRight[m]);
+                            }
+                            else
+                            {
+                                eggSmashRight = true;
+                                //livesCount--;
+                                //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                                ////Console.Beep();
+                                //lives.RemoveAt(livesCount - 1);
+                                //eggsDownRight.Clear();
+                                ClearEggs();
+                            }
                         }
                     }
                 }
+
                 //End Milko
 
                 //Orlin Sunday Morning
@@ -520,11 +588,11 @@ class NuPagadi
                 {
                     if (eggSmashLeft)
                     {
-                        PrintOnPosition(13, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
+                        PrintOnPosition(13, gameFieldHeight - 2, "(O)", ConsoleColor.DarkRed);
                     }
                     if (eggSmashRight)
                     {
-                        PrintOnPosition(60, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
+                        PrintOnPosition(60, gameFieldHeight - 2, "(O)", ConsoleColor.DarkRed);
                     }
 
                     livesCount--;
@@ -544,6 +612,8 @@ class NuPagadi
                 PrintEggs(eggsUpRight);
                 PrintEggs(eggsDownRight);
                 //End Milko
+
+
             }
         }
     }
