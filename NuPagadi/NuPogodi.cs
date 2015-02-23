@@ -16,7 +16,7 @@ class NuPagadi
 {
     private static void DrawField(char[,] gameField)
     {
-        
+
         for (int i = 0; i < gameField.GetLength(0); i++)
         {
             StringBuilder field = new StringBuilder();
@@ -244,7 +244,7 @@ class NuPagadi
             {
                 PrintScore(score);
                 PrintLives(lives);
-                Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);             
+                Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
 
                 //Orlin
@@ -257,6 +257,7 @@ class NuPagadi
 
                 bool eggSmashLeft = false;
                 bool eggSmashRight = false;
+                bool goldEgg = false;
                 //End Orlin
 
                 //Milko
@@ -351,9 +352,10 @@ class NuPagadi
                         {
                             if (eggsUpLeft[j].color == ConsoleColor.DarkYellow && livesCount < 5)
                             {
-                                livesCount++;
-                                lives.Add('\u2665');
-                                score += 9;
+                                goldEgg = true;
+                                //livesCount++;
+                                //lives.Add('\u2665');
+                                //score += 9;
                             }
                             score++;
                             eggsUpLeft.Remove(eggsUpLeft[j]);
@@ -361,10 +363,10 @@ class NuPagadi
                         else
                         {
                             eggSmashLeft = true;
-                            livesCount--;
-                            LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            Console.Beep();
-                            lives.RemoveAt(livesCount - 1);
+                            //livesCount--;
+                            //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            ////Console.Beep();
+                            //lives.RemoveAt(livesCount - 1);
                             eggsUpLeft.Clear();
                         }
 
@@ -383,9 +385,10 @@ class NuPagadi
                         {
                             if (eggsDownLeft[k].color == ConsoleColor.DarkYellow && livesCount < 5)
                             {
-                                livesCount++;
-                                lives.Add('\u2665');
-                                score += 9;
+                                goldEgg = true;
+                                //livesCount++;
+                                //lives.Add('\u2665');
+                                //score += 9;
                             }
                             score++;
                             eggsDownLeft.Remove(eggsDownLeft[k]);
@@ -393,10 +396,10 @@ class NuPagadi
                         else
                         {
                             eggSmashLeft = true;
-                            livesCount--;
-                            LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            Console.Beep();
-                            lives.RemoveAt(livesCount - 1);
+                            // livesCount--;
+                            // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            //// Console.Beep();
+                            // lives.RemoveAt(livesCount - 1);
                             eggsDownLeft.Clear();
                         }
                     }
@@ -414,9 +417,10 @@ class NuPagadi
                         {
                             if (eggsUpRight[l].color == ConsoleColor.DarkYellow && livesCount < 5)
                             {
-                                livesCount++;
-                                lives.Add('\u2665');
-                                score += 9;
+                                goldEgg = true;
+                                //livesCount++;
+                                //lives.Add('\u2665');
+                                //score += 9;
                             }
                             score++;
                             eggsUpRight.Remove(eggsUpRight[l]);
@@ -424,10 +428,10 @@ class NuPagadi
                         else
                         {
                             eggSmashRight = true;
-                            livesCount--;
-                            LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            Console.Beep();
-                            lives.RemoveAt(livesCount - 1);
+                            // livesCount--;
+                            // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            //// Console.Beep();
+                            // lives.RemoveAt(livesCount - 1);
                             eggsUpRight.Clear();
                         }
                     }
@@ -445,9 +449,10 @@ class NuPagadi
                         {
                             if (eggsDownRight[m].color == ConsoleColor.DarkYellow && livesCount < 5)
                             {
-                                livesCount++;
-                                lives.Add('\u2665');
-                                score += 9;
+                                goldEgg = true;
+                                //livesCount++;
+                                //lives.Add('\u2665');
+                                //score += 9;
                             }
                             score++;
                             eggsDownRight.Remove(eggsDownRight[m]);
@@ -455,10 +460,10 @@ class NuPagadi
                         else
                         {
                             eggSmashRight = true;
-                            livesCount--;
-                            LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                            Console.Beep();
-                            lives.RemoveAt(livesCount - 1);
+                            //livesCount--;
+                            //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                            ////Console.Beep();
+                            //lives.RemoveAt(livesCount - 1);
                             eggsDownRight.Clear();
                         }
                     }
@@ -521,8 +526,19 @@ class NuPagadi
                     {
                         PrintOnPosition(60, gameFieldHeight - 2, "(0)", ConsoleColor.DarkRed);
                     }
+
+                    livesCount--;
+                    LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                    Console.Beep();
+                    lives.RemoveAt(livesCount - 1);
                 }
 
+                if (goldEgg)
+                {
+                    livesCount++;
+                    lives.Add('\u2665');
+                    score += 9;
+                }
                 PrintEggs(eggsUpLeft);
                 PrintEggs(eggsDownLeft);
                 PrintEggs(eggsUpRight);
