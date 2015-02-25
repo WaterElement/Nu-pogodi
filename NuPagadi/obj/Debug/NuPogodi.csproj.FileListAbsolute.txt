@@ -27,3 +27,9 @@ E:\Telerik\Nu-pogodi\NuPagadi\obj\Debug\NuPagadi.pdb
 E:\Telerik\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.exe
 E:\Telerik\Nu-pogodi\NuPagadi\bin\Debug\NuPagadi.pdb
 E:\Telerik\Nu-pogodi\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache
+C:\Users\Nitro\Documents\GitHub\TeamWork\NuPagadi\bin\Debug\NuPagadi.exe.config
+C:\Users\Nitro\Documents\GitHub\TeamWork\NuPagadi\obj\Debug\NuPagadi.exe
+C:\Users\Nitro\Documents\GitHub\TeamWork\NuPagadi\obj\Debug\NuPagadi.pdb
+C:\Users\Nitro\Documents\GitHub\TeamWork\NuPagadi\bin\Debug\NuPagadi.exe
+C:\Users\Nitro\Documents\GitHub\TeamWork\NuPagadi\bin\Debug\NuPagadi.pdb
+C:\Users\Nitro\Documents\GitHub\TeamWork\NuPagadi\obj\Debug\NuPogodi.csprojResolveAssemblyReference.cache

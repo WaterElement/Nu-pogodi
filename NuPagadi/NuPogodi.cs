@@ -134,6 +134,40 @@ class NuPagadi
         }
     }
 
+    private static void PlaceRabbit(char[,] env, int positionX, int positionY)
+    {
+        string fileName = "Rabbit.txt";
+
+        StreamReader reader = new StreamReader(fileName);
+        int verticalLinesCounter = 0;
+        using (reader)
+        {
+            while (true)
+            {
+                string line = reader.ReadLine();
+
+                if (line == null)
+                {
+                    break;
+                }
+
+                for (int i = 0; i < line.Length; i++)
+                {
+                    env[positionY + verticalLinesCounter, positionX + i] = line[i];
+                }
+
+                verticalLinesCounter++;
+            }
+        }
+    }
+
+    static void AddRabbit(char[,] env)
+    {
+        const int positionX = 16;
+        const int positionY = 4;
+        PlaceRabbit(env, positionX, positionY);
+    }
+    
     static void GameSpeed(int score, double sleepTime, double speed, double maxSpeed)
     {
         if (score % 20 == 0 && score != 0)
@@ -599,6 +633,7 @@ class NuPagadi
                     LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
                     Console.Beep();
                     lives.RemoveAt(livesCount - 1);
+                    AddRabbit(gameField);
                 }
 
                 if (goldEgg)
