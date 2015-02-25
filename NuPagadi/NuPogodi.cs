@@ -366,28 +366,28 @@ class NuPagadi
                         {
                             case 1:
                                 newEgg.x = 6;
-                                newEgg.y = 10;
+                                newEgg.y = 11;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkYellow;
                                 eggsUpLeft.Add(newEgg);
                                 break;
                             case 2:
                                 newEgg.x = 6;
-                                newEgg.y = 15;
+                                newEgg.y = 17;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkYellow;
                                 eggsDownLeft.Add(newEgg);
                                 break;
                             case 3:
                                 newEgg.x = 69;
-                                newEgg.y = 10;
+                                newEgg.y = 11;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkYellow;
                                 eggsUpRight.Add(newEgg);
                                 break;
                             case 4:
                                 newEgg.x = 69;
-                                newEgg.y = 15;
+                                newEgg.y = 17;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkYellow;
                                 eggsDownRight.Add(newEgg);
@@ -401,28 +401,28 @@ class NuPagadi
                         {
                             case 1:
                                 newEgg.x = 6;
-                                newEgg.y = 10;
+                                newEgg.y = 11;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkGray;
                                 eggsUpLeft.Add(newEgg);
                                 break;
                             case 2:
                                 newEgg.x = 6;
-                                newEgg.y = 15;
+                                newEgg.y = 17;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkGray;
                                 eggsDownLeft.Add(newEgg);
                                 break;
                             case 3:
                                 newEgg.x = 69;
-                                newEgg.y = 10;
+                                newEgg.y = 11;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkGray;
                                 eggsUpRight.Add(newEgg);
                                 break;
                             case 4:
                                 newEgg.x = 69;
-                                newEgg.y = 15;
+                                newEgg.y = 17;
                                 newEgg.z = "O";
                                 newEgg.color = ConsoleColor.DarkGray;
                                 eggsDownRight.Add(newEgg);
