@@ -94,8 +94,8 @@ public class Autoplay
         int gameFieldHeight = 31;
         char[,] gameField = new char[gameFieldHeight, gameFildWidth];
 
-        Console.SetWindowSize(gameFildWidth + 1, gameFieldHeight + 1); //set console window size
-        Console.SetBufferSize(gameFildWidth + 1, gameFieldHeight + 1); //removes the scroll bars if equal to window size
+        //Console.SetWindowSize(gameFildWidth + 1, gameFieldHeight); //set console window size
+        //Console.SetBufferSize(gameFildWidth + 1, gameFieldHeight); //removes the scroll bars if equal to window size
         Console.CursorVisible = false;
 
         Console.BackgroundColor = ConsoleColor.White;
@@ -105,6 +105,8 @@ public class Autoplay
         string text = environment.ReadToEnd();
         Console.ForegroundColor = ConsoleColor.Black;
         Console.WriteLine(text);
+        Console.BackgroundColor = ConsoleColor.White;
+
         environment.Close();
 
         while (autoplay)
