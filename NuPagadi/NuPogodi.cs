@@ -5,6 +5,400 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
+public class Autoplay
+{
+    static void drawClockSimbols(int rows, int x)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+
+        var numbers = new StreamReader("numbers.txt");
+
+        int y = 0;
+        using (numbers)
+        {
+            string number = numbers.ReadLine();
+
+            for (int row = 0; row <= 49; row++)
+            {
+
+                if (row >= rows && row <= rows + 4)
+                {
+                    Console.SetCursorPosition(x, (y + 3));
+                    Console.WriteLine(number);
+                    y++;
+                }
+                number = numbers.ReadLine();
+            }
+        }
+    }
+    static void drawBasket(int rows, int x, int y)
+    {
+        Console.ForegroundColor = ConsoleColor.Black;
+
+        var baskets = new StreamReader("numbers.txt");
+        using (baskets)
+        {
+            string number = baskets.ReadLine();
+
+            for (int row = 0; row <= 118; row++)
+            {
+
+                if (row >= rows && row <= rows + 16)
+                {
+                    Console.SetCursorPosition(x, y);
+                    Console.WriteLine(number);
+                    y++;
+                }
+                number = baskets.ReadLine();
+            }
+        }
+    }
+    protected static void WriteAt(char s, int x, int y)
+    {
+        Console.SetCursorPosition(x, y);
+        Console.Write(s);
+
+    }
+    //static void Main()
+    //{
+    //    Autoplay();
+    //}
+
+    public static void Autoplaya()
+    {
+        char charEgg00 = ' ';
+        char charEgg01 = ' ';
+        char charEgg02 = ' ';
+        char charEgg03 = ' ';
+        char charEgg04 = ' ';
+        char charEgg10 = ' ';
+        char charEgg11 = ' ';
+        char charEgg12 = ' ';
+        char charEgg13 = ' ';
+        char charEgg14 = ' ';
+        char charEgg20 = ' ';
+        char charEgg21 = ' ';
+        char charEgg22 = ' ';
+        char charEgg23 = ' ';
+        char charEgg24 = ' ';
+        char charEgg30 = ' ';
+        char charEgg31 = ' ';
+        char charEgg32 = ' ';
+        char charEgg33 = ' ';
+        char charEgg34 = ' ';
+        int tempTime = 800;
+        int tempState = 10;
+        bool autoplay = true;
+
+        int gameFildWidth = 76;
+        int gameFieldHeight = 31;
+        char[,] gameField = new char[gameFieldHeight, gameFildWidth];
+
+        Console.SetWindowSize(gameFildWidth + 1, gameFieldHeight + 1); //set console window size
+        Console.SetBufferSize(gameFildWidth + 1, gameFieldHeight + 1); //removes the scroll bars if equal to window size
+        Console.CursorVisible = false;
+
+        Console.BackgroundColor = ConsoleColor.White;
+        //get sistem time
+        string time = DateTime.Now.ToString("HH:mm");
+        char[] timeArray = time.ToCharArray();
+
+        var environment = new StreamReader("environmentauto.txt");
+        string text = environment.ReadToEnd();
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine(text);
+        environment.Close();
+
+        while (autoplay)
+        {
+            if (tempTime == 800)
+            {
+                for (int i = 0; i <= 6; i++)
+                {
+                    if (i == 0)
+                    {
+                        if (timeArray[i] == '1')
+                        {
+                            drawClockSimbols(0, 45);
+                        }
+                        if (timeArray[i] == '2')
+                        {
+                            drawClockSimbols(5, 45);
+                        }
+                        if (timeArray[i] == '0')
+                        {
+                            drawClockSimbols(10, 45);
+                        }
+                    }
+                    if (i == 1)
+                    {
+                        if (timeArray[i] == '1')
+                        {
+                            drawClockSimbols(0, 51);
+                        }
+                        if (timeArray[i] == '2')
+                        {
+                            drawClockSimbols(5, 51);
+                        }
+                        if (timeArray[i] == '3')
+                        {
+                            drawClockSimbols(10, 51);
+                        }
+                        if (timeArray[i] == '4')
+                        {
+                            drawClockSimbols(15, 51);
+                        }
+                        if (timeArray[i] == '5')
+                        {
+                            drawClockSimbols(20, 51);
+                        }
+                        if (timeArray[i] == '6')
+                        {
+                            drawClockSimbols(25, 51);
+                        }
+                        if (timeArray[i] == '7')
+                        {
+                            drawClockSimbols(30, 51);
+                        }
+                        if (timeArray[i] == '8')
+                        {
+                            drawClockSimbols(35, 51);
+                        }
+                        if (timeArray[i] == '9')
+                        {
+                            drawClockSimbols(40, 51);
+                        }
+                        if (timeArray[i] == '0')
+                        {
+                            drawClockSimbols(45, 51);
+                        }
+                    }
+
+                    WriteAt('#', 57, 4);
+                    WriteAt('#', 57, 6);
+
+                    //set minutes
+                    if (i == 3)
+                    {
+                        if (timeArray[i] == '1')
+                        {
+                            drawClockSimbols(0, 60);
+                        }
+                        if (timeArray[i] == '2')
+                        {
+                            drawClockSimbols(5, 60);
+                        }
+                        if (timeArray[i] == '3')
+                        {
+                            drawClockSimbols(10, 60);
+                        }
+                        if (timeArray[i] == '4')
+                        {
+                            drawClockSimbols(15, 60);
+                        }
+                        if (timeArray[i] == '5')
+                        {
+                            drawClockSimbols(20, 60);
+                        }
+                        if (timeArray[i] == '6')
+                        {
+                            drawClockSimbols(24, 60);
+                        }
+                        if (timeArray[i] == '7')
+                        {
+                            drawClockSimbols(30, 60);
+                        }
+                        if (timeArray[i] == '8')
+                        {
+                            drawClockSimbols(35, 60);
+                        }
+                        if (timeArray[i] == '9')
+                        {
+                            drawClockSimbols(40, 60);
+                        }
+                        if (timeArray[i] == '0')
+                        {
+                            drawClockSimbols(45, 60);
+                        }
+                    }
+                    if (i == 4)
+                    {
+                        if (timeArray[i] == '1')
+                        {
+                            drawClockSimbols(0, 66);
+                        }
+                        if (timeArray[i] == '2')
+                        {
+                            drawClockSimbols(5, 66);
+                        }
+                        if (timeArray[i] == '3')
+                        {
+                            drawClockSimbols(10, 66);
+                        }
+                        if (timeArray[i] == '4')
+                        {
+                            drawClockSimbols(15, 66);
+                        }
+                        if (timeArray[i] == '5')
+                        {
+                            drawClockSimbols(20, 66);
+                        }
+                        if (timeArray[i] == '6')
+                        {
+                            drawClockSimbols(25, 66);
+                        }
+                        if (timeArray[i] == '7')
+                        {
+                            drawClockSimbols(30, 66);
+                        }
+                        if (timeArray[i] == '8')
+                        {
+                            drawClockSimbols(35, 66);
+                        }
+                        if (timeArray[i] == '9')
+                        {
+                            drawClockSimbols(40, 66);
+                        }
+                        if (timeArray[i] == '0')
+                        {
+                            drawClockSimbols(45, 66);
+                        }
+                    }
+                }
+
+                Random random = new Random();
+                int randomNumber = random.Next(0, 6);
+                Random wolfRandom = new Random();
+                int wolfRandomNumber = wolfRandom.Next(0, 4);
+
+                charEgg04 = charEgg03; //5
+                charEgg03 = charEgg02; //4
+                charEgg02 = charEgg01; //3
+                charEgg01 = charEgg00; //2
+                charEgg00 = ' ';
+                charEgg14 = charEgg13; //5
+                charEgg13 = charEgg12; //4
+                charEgg12 = charEgg11; //3
+                charEgg11 = charEgg10; //2
+                charEgg10 = ' ';
+                charEgg24 = charEgg23; //5
+                charEgg23 = charEgg22; //4
+                charEgg22 = charEgg21; //3
+                charEgg21 = charEgg20; //2
+                charEgg20 = ' ';
+                charEgg34 = charEgg33; //5
+                charEgg33 = charEgg32; //4
+                charEgg32 = charEgg31; //3
+                charEgg31 = charEgg30; //2
+                charEgg00 = ' ';
+                char upLeft = (randomNumber == 0) ? charEgg00 = 'O' : charEgg00 = ' ';
+                char upRigth = (randomNumber == 1) ? charEgg10 = 'O' : charEgg10 = ' ';
+                char downLeft = (randomNumber == 2) ? charEgg20 = 'O' : charEgg20 = ' ';
+                char downRigth = (randomNumber == 3) ? charEgg30 = 'O' : charEgg30 = ' ';
+
+                WriteAt(charEgg00, 8, 13);
+                WriteAt(charEgg01, 9, 14);
+                WriteAt(charEgg02, 10, 15);
+                WriteAt(charEgg03, 11, 16);
+                WriteAt(charEgg04, 12, 17);
+
+                WriteAt(charEgg10, 66, 14);
+                WriteAt(charEgg11, 65, 15);
+                WriteAt(charEgg12, 64, 16);
+                WriteAt(charEgg13, 63, 17);
+                WriteAt(charEgg14, 62, 18);
+
+                WriteAt(charEgg20, 8, 19);
+                WriteAt(charEgg21, 9, 20);
+                WriteAt(charEgg22, 10, 21);
+                WriteAt(charEgg23, 11, 22);
+                WriteAt(charEgg24, 12, 23);
+
+                WriteAt(charEgg30, 66, 20);
+                WriteAt(charEgg31, 65, 21);
+                WriteAt(charEgg32, 64, 22);
+                WriteAt(charEgg33, 63, 23);
+                WriteAt(charEgg34, 62, 24);
+
+                Console.ForegroundColor = ConsoleColor.Black;
+
+                //bsket up left
+                if (wolfRandomNumber == 0)
+                {
+                    if (tempState != 0)
+                    {
+                        drawBasket(50, 12, 13);
+                        tempState = 0;
+                    }
+                }
+
+                //basket down left
+                if (wolfRandomNumber == 1)
+                {
+                    if (tempState != 1)
+                    {
+                        drawBasket(67, 12, 13);
+                        tempState = 1;
+                    }
+                }
+                if (wolfRandomNumber > 1)
+                {
+                    for (int i = 13; i < 30; i++)
+                    {
+                        for (int j = 12; j < 36; j++)
+                        {
+                            WriteAt(' ', j, i);
+                        }
+                    }
+                }
+
+                //basket up right
+                if (wolfRandomNumber == 2)
+                {
+                    if (tempState != 2)
+                    {
+                        drawBasket(84, 36, 13);
+                        tempState = 2;
+                    }
+                }
+
+                //basket down right
+                if (wolfRandomNumber == 3)
+                {
+                    if (tempState != 3)
+                    {
+                        drawBasket(101, 36, 13);
+                        tempState = 3;
+                    }
+                }
+                if (wolfRandomNumber < 2)
+                {
+                    for (int i = 13; i < 30; i++)
+                    {
+                        for (int j = 38; j < 64; j++)
+                        {
+                            WriteAt(' ', j, i);
+                        }
+                    }
+                }
+                tempTime = 0;
+            }
+            Thread.Sleep(10);
+            tempTime += 10;
+            while (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo pressedKey = Console.ReadKey(true);
+                if (pressedKey.Key == ConsoleKey.Enter)
+                {
+                    //numbers.txt.close();
+                    autoplay = false;
+                }
+            }
+        }
+    }
+
+}
+
 class Egg
 {
     public int x;
@@ -14,6 +408,31 @@ class Egg
 }
 class NuPagadi
 {
+    static void drawClockSimbols(int rows, int x)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+
+        var numbers = new StreamReader("numbers.txt");
+
+        int y = 0;
+        using (numbers)
+        {
+            string number = numbers.ReadLine();
+
+            for (int row = 0; row <= 49; row++)
+            {
+
+                if (row >= rows && row <= rows + 4)
+                {
+                    Console.SetCursorPosition(x, (y + 3));
+                    Console.WriteLine(number);
+                    y++;
+                }
+                number = numbers.ReadLine();
+            }
+        }
+    }
+
     private static void DrawField(char[,] gameField)
     {
 
@@ -208,10 +627,140 @@ class NuPagadi
 
     static void PrintScore(int score) // insteed of this we can use PrintOnPosition
     {
-        Console.SetCursorPosition(Console.WindowWidth / 2 + 20, 0);
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("score: " + score);
-        Console.ForegroundColor = ConsoleColor.Gray;
+        if (score < 10)
+        {
+            if (score == 1)
+            {
+                drawClockSimbols(0, 61);
+            }
+            if (score == 2)
+            {
+                drawClockSimbols(5, 61);
+            }
+            if (score == 3)
+            {
+                drawClockSimbols(10, 61);
+            }
+            if (score == 4)
+            {
+                drawClockSimbols(15, 61);
+            }
+            if (score == 5)
+            {
+                drawClockSimbols(20, 61);
+            }
+            if (score == 6)
+            {
+                drawClockSimbols(25, 61);
+            }
+            if (score == 7)
+            {
+                drawClockSimbols(30, 61);
+            }
+            if (score == 8)
+            {
+                drawClockSimbols(35, 61);
+            }
+            if (score == 9)
+            {
+                drawClockSimbols(40, 61);
+            }
+            if (score == 0)
+            {
+                drawClockSimbols(45, 61);
+            }
+        }
+        else
+        {
+            int tempOne = score / 10;
+            int tempDecimal = score % 10;
+
+            if (tempOne == 1)
+            {
+                drawClockSimbols(0, 55);
+            }
+            if (tempOne == 2)
+            {
+                drawClockSimbols(5, 55);
+            }
+            if (tempOne == 3)
+            {
+                drawClockSimbols(10, 55);
+            }
+            if (tempOne == 4)
+            {
+                drawClockSimbols(15, 55);
+            }
+            if (tempOne == 5)
+            {
+                drawClockSimbols(20, 55);
+            }
+            if (tempOne == 6)
+            {
+                drawClockSimbols(25, 55);
+            }
+            if (tempOne == 7)
+            {
+                drawClockSimbols(30, 55);
+            }
+            if (tempOne == 8)
+            {
+                drawClockSimbols(35, 55);
+            }
+            if (tempOne == 9)
+            {
+                drawClockSimbols(40, 55);
+            }
+            if (tempOne == 0)
+            {
+                drawClockSimbols(45, 55);
+            }
+            if (tempDecimal == 1)
+            {
+                drawClockSimbols(0, 61);
+            }
+            if (tempDecimal == 2)
+            {
+                drawClockSimbols(5, 61);
+            }
+            if (tempDecimal == 3)
+            {
+                drawClockSimbols(10, 61);
+            }
+            if (tempDecimal == 4)
+            {
+                drawClockSimbols(15, 61);
+            }
+            if (tempDecimal == 5)
+            {
+                drawClockSimbols(20, 61);
+            }
+            if (tempDecimal == 6)
+            {
+                drawClockSimbols(25, 61);
+            }
+            if (tempDecimal == 7)
+            {
+                drawClockSimbols(30, 61);
+            }
+            if (tempDecimal == 8)
+            {
+                drawClockSimbols(35, 61);
+            }
+            if (tempDecimal == 9)
+            {
+                drawClockSimbols(40, 61);
+            }
+            if (tempDecimal == 0)
+            {
+                drawClockSimbols(45, 61);
+            }
+
+        }
+        //Console.SetCursorPosition(Console.WindowWidth / 2 + 20, 0);
+        //Console.ForegroundColor = ConsoleColor.Cyan;
+        //Console.WriteLine("score: " + score);
+        //Console.ForegroundColor = ConsoleColor.Gray;
     }
 
     static void PrintLives(List<char> lives) // insteed of this we can use PrintOnPosition
@@ -272,12 +821,16 @@ class NuPagadi
 
     static int ticks = 0;
     static int maxTicks = 3;
+    #region Autoplay
 
+    #endregion
 
 
 
     static void Main()
     {
+        Autoplay.Autoplaya();
+
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         //Orlin Sunday morning edits
@@ -305,13 +858,13 @@ class NuPagadi
 
         Console.BackgroundColor = ConsoleColor.White;
 
-        PrintOnPosition(Console.WindowWidth / 2 - 10,
-               Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
-        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+        //PrintOnPosition(Console.WindowWidth / 2 - 10,
+         //      Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
+        //ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
         UpdateSpeed();
 
-        if (keyInfo.Key == ConsoleKey.Enter)
+        if (true)
         {
             while (true)
             {
