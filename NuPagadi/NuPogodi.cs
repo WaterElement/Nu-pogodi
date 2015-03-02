@@ -99,9 +99,7 @@ public class Autoplay
         Console.CursorVisible = false;
 
         Console.BackgroundColor = ConsoleColor.White;
-        //get sistem time
-        string time = DateTime.Now.ToString("HH:mm");
-        char[] timeArray = time.ToCharArray();
+        
 
         var environment = new StreamReader("environmentauto.txt");
         string text = environment.ReadToEnd();
@@ -113,6 +111,10 @@ public class Autoplay
         {
             if (tempTime == 800)
             {
+				//get sistem time
+				string time = DateTime.Now.ToString("HH:mm");
+				char[] timeArray = time.ToCharArray();
+			
                 for (int i = 0; i <= 6; i++)
                 {
                     if (i == 0)
