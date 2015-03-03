@@ -59,11 +59,6 @@ public class Autoplay
         Console.Write(s);
 
     }
-    //static void Main()
-    //{
-    //    Autoplay();
-    //}
-
     public static void Autoplaya()
     {
         char charEgg00 = ' ';
@@ -388,7 +383,6 @@ public class Autoplay
                 ConsoleKeyInfo pressedKey = Console.ReadKey(true);
                 if (pressedKey.Key == ConsoleKey.Enter)
                 {
-                    //numbers.txt.close();
                     autoplay = false;
                 }
             }
@@ -439,9 +433,9 @@ class NuPagadi
 
             for (int j = 0; j < gameField.GetLength(1); j++)
             {
-                //Console.Write(gameField[i, j]);
                 field.Append(gameField[i, j]);
             }
+
             Console.Write(field);
             Console.WriteLine();
         }
@@ -453,28 +447,19 @@ class NuPagadi
         {
             throw new FileNotFoundException("Environment file not found!");
         }
-        StreamReader reader = new StreamReader("environment.txt");
 
-        char[,] environment = new char[31, 76];
-        //string[] env = new string[31];
+        StreamReader reader = new StreamReader("environment.txt");
 
         using (reader)
         {
             for (int i = 0; i < gameField.GetLength(0); i++)
             {
                 string line = reader.ReadLine();
-                //char[] charArr = line.ToCharArray();
                 for (int j = 0; j < gameField.GetLength(1); j++)
                 {
                     gameField[i, j] = line[j];
                 }
             }
-
-            //while (line != null)
-            //{
-            //    Console.WriteLine(line);
-            //    line = reader.ReadLine();
-            //}
         }
     }
 
@@ -557,10 +542,12 @@ class NuPagadi
                 fileName = "wolfrightup.txt";
                 break;
         }
+
         if (!File.Exists(fileName))
         {
             throw new FileNotFoundException("Wolf position file not found");
         }
+
         StreamReader reader = new StreamReader(fileName);
         int verticalLinesCounter = 0;
 
@@ -591,6 +578,7 @@ class NuPagadi
 
         StreamReader reader = new StreamReader(fileName);
         int verticalLinesCounter = 0;
+
         using (reader)
         {
             while (true)
@@ -617,20 +605,6 @@ class NuPagadi
         const int positionX = 16;
         const int positionY = 4;
         PlaceRabbit(env, positionX, positionY);
-    }
-
-    static void GameSpeed(int score, double sleepTime, double speed, double maxSpeed)
-    {
-        if (score % 20 == 0 && score != 0)
-        {
-            speed += 10;
-            if (speed > maxSpeed)
-            {
-                speed = maxSpeed;
-            }
-        }
-
-        Thread.Sleep((int)(sleepTime - speed));
     }
 
     private static void LivesCheck(int livesCount)
@@ -855,8 +829,7 @@ class NuPagadi
         Autoplay.Autoplaya();
 
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        Console.OutputEncoding = System.Text.Encoding.Unicode;
-        //Orlin Sunday morning edits
+        Console.OutputEncoding = Encoding.Unicode;
 
         Console.Title = "Nu Pogodi";//Teodora
 
@@ -884,15 +857,8 @@ class NuPagadi
         string basketPosition = "down right"; // this depends on pressed key for basket position
         List<char> lives = new List<char> { '\u2665', '\u2665', '\u2665', '\u2665', '\u2665' };
         int livesCount = lives.Count;
-        double speed = 0;
-        double maxSpeed = 400;
-
 
         Console.BackgroundColor = ConsoleColor.White;
-
-        //PrintOnPosition(Console.WindowWidth / 2 - 10,
-        //      Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
-        //ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
         UpdateSpeed();
 
@@ -914,36 +880,21 @@ class NuPagadi
                 PrintScore(score);
                 PrintLives(lives);
                 Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
-                //Console.ForegroundColor = ConsoleColor.DarkCyan;
-
                 Console.ForegroundColor = ConsoleColor.Black;
-
-
-                //Orlin
-                //Orlin
                 double sleepTime = 1000; // eggs moving slower then faster --> stella
-                //sleepTime -= 0.05;
-                //Thread.Sleep((int)sleepTime);
                 Thread.Sleep(200);
-
-                //GameSpeed(score, sleepTime, speed, maxSpeed);  // Plamen
-
-
                 Console.Clear();
-
                 bool eggSmashLeft = false;
                 bool eggSmashRight = false;
                 bool goldEgg = false;
-                //End Orlin
 
-                //Milko
                 //Draw the eggs
-
                 if (ticks == maxTicks)
                 {
 
                     Egg newEgg = new Egg();
                     int chance = randomGenerator.Next(0, 100);
+
                     if (chance < 5)                                 //Golden Eggs - life++ ; score +9;
                     {
                         int eggLine = randomGenerator.Next(1, 5);
@@ -982,7 +933,7 @@ class NuPagadi
                     else if (chance < 20)
                     {
                         int eggLine = randomGenerator.Next(1, 5);
-                        switch (eggLine)                            // slojil sum 4 case-a za vsqka liniq po edin
+                        switch (eggLine)
                         {
                             case 1:
                                 newEgg.x = 6;
@@ -1034,9 +985,6 @@ class NuPagadi
                                 if (eggsUpLeft[j].color == ConsoleColor.DarkYellow && livesCount < 5)
                                 {
                                     goldEgg = true;
-                                    //livesCount++;
-                                    //lives.Add('\u2665');
-                                    //score += 9;
                                 }
                                 score++;
                                 eggsUpLeft.Remove(eggsUpLeft[j]);
@@ -1044,11 +992,6 @@ class NuPagadi
                             else
                             {
                                 eggSmashLeft = true;
-                                //livesCount--;
-                                //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                                ////Console.Beep();
-                                //lives.RemoveAt(livesCount - 1);
-                                //eggsUpLeft.Clear();
                                 ClearEggs();
                             }
 
@@ -1068,9 +1011,6 @@ class NuPagadi
                                 if (eggsDownLeft[k].color == ConsoleColor.DarkYellow && livesCount < 5)
                                 {
                                     goldEgg = true;
-                                    //livesCount++;
-                                    //lives.Add('\u2665');
-                                    //score += 9;
                                 }
                                 score++;
                                 eggsDownLeft.Remove(eggsDownLeft[k]);
@@ -1078,11 +1018,6 @@ class NuPagadi
                             else
                             {
                                 eggSmashLeft = true;
-                                // livesCount--;
-                                // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                                //// Console.Beep();
-                                // lives.RemoveAt(livesCount - 1);
-                                //eggsDownLeft.Clear();
                                 ClearEggs();
                             }
                         }
@@ -1101,21 +1036,14 @@ class NuPagadi
                                 if (eggsUpRight[l].color == ConsoleColor.DarkYellow && livesCount < 5)
                                 {
                                     goldEgg = true;
-                                    //livesCount++;
-                                    //lives.Add('\u2665');
-                                    //score += 9;
                                 }
+
                                 score++;
                                 eggsUpRight.Remove(eggsUpRight[l]);
                             }
                             else
                             {
                                 eggSmashRight = true;
-                                // livesCount--;
-                                // LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                                //// Console.Beep();
-                                // lives.RemoveAt(livesCount - 1);
-                                //eggsUpRight.Clear();
                                 ClearEggs();
                             }
                         }
@@ -1134,9 +1062,6 @@ class NuPagadi
                                 if (eggsDownRight[m].color == ConsoleColor.DarkYellow && livesCount < 5)
                                 {
                                     goldEgg = true;
-                                    //livesCount++;
-                                    //lives.Add('\u2665');
-                                    //score += 9;
                                 }
                                 score++;
                                 eggsDownRight.Remove(eggsDownRight[m]);
@@ -1144,20 +1069,11 @@ class NuPagadi
                             else
                             {
                                 eggSmashRight = true;
-                                //livesCount--;
-                                //LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
-                                ////Console.Beep();
-                                //lives.RemoveAt(livesCount - 1);
-                                //eggsDownRight.Clear();
                                 ClearEggs();
                             }
                         }
                     }
                 }
-
-                //End Milko
-
-                //Orlin Sunday Morning
 
                 while (Console.KeyAvailable)
                 {
@@ -1226,11 +1142,9 @@ class NuPagadi
                         AddWolfRightUp(gameField);
                     }
                 }
-                //End Orlin Sunday Morning
-
+                
                 DrawField(gameField);
 
-                //Milko
                 if (eggSmashLeft || eggSmashRight)
                 {
                     if (eggSmashLeft)
@@ -1243,7 +1157,7 @@ class NuPagadi
                     }
 
                     livesCount--;
-                    LivesCheck(livesCount); //aded metod for lives check if Stella is OK :)
+                    LivesCheck(livesCount);
                     Console.Beep();
                     lives.RemoveAt(livesCount - 1);
                     AddRabbit(gameField);
@@ -1255,13 +1169,11 @@ class NuPagadi
                     lives.Add('\u2665');
                     score += 9;
                 }
+
                 PrintEggs(eggsUpLeft);
                 PrintEggs(eggsDownLeft);
                 PrintEggs(eggsUpRight);
                 PrintEggs(eggsDownRight);
-                //End Milko
-
-
             }
         }
     }
