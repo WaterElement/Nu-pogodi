@@ -90,16 +90,10 @@ public class Autoplay
         int tempState = 10;
         bool autoplay = true;
 
-        int gameFildWidth = 76;
-        int gameFieldHeight = 31;
-        char[,] gameField = new char[gameFieldHeight, gameFildWidth];
-
-        //Console.SetWindowSize(gameFildWidth + 1, gameFieldHeight); //set console window size
-        //Console.SetBufferSize(gameFildWidth + 1, gameFieldHeight); //removes the scroll bars if equal to window size
         Console.CursorVisible = false;
 
         Console.BackgroundColor = ConsoleColor.White;
-        
+
 
         var environment = new StreamReader("environmentauto.txt");
         string text = environment.ReadToEnd();
@@ -113,10 +107,10 @@ public class Autoplay
         {
             if (tempTime == 800)
             {
-				//get sistem time
-				string time = DateTime.Now.ToString("HH:mm");
-				char[] timeArray = time.ToCharArray();
-			
+                //get sistem time
+                string time = DateTime.Now.ToString("HH:mm");
+                char[] timeArray = time.ToCharArray();
+
                 for (int i = 0; i <= 6; i++)
                 {
                     if (i == 0)
@@ -402,7 +396,6 @@ public class Autoplay
     }
 
 }
-
 class Egg
 {
     public int x;
@@ -456,6 +449,10 @@ class NuPagadi
 
     private static void ResetEnvironment(char[,] gameField)
     {
+        if (!File.Exists("environment.txt"))
+        {
+            throw new FileNotFoundException("Environment file not found!");
+        }
         StreamReader reader = new StreamReader("environment.txt");
 
         char[,] environment = new char[31, 76];
@@ -486,7 +483,14 @@ class NuPagadi
         const int positionY = 13;
         const int positionX = 36;
 
-        PlaceWolf(env, positionX, positionY, "right");
+        try
+        {
+            PlaceWolf(env, positionX, positionY, "right");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     static void AddWolfLeft(char[,] env)
@@ -494,7 +498,14 @@ class NuPagadi
         const int positionY = 13;
         const int positionX = 13;
 
-        PlaceWolf(env, positionX, positionY, "left");
+        try
+        {
+            PlaceWolf(env, positionX, positionY, "left");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     static void AddWolfLeftUp(char[,] env)
@@ -502,7 +513,14 @@ class NuPagadi
         const int positionY = 13;
         const int positionX = 13;
 
-        PlaceWolf(env, positionX, positionY, "leftup");
+        try
+        {
+            PlaceWolf(env, positionX, positionY, "leftup");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     static void AddWolfRightUp(char[,] env)
@@ -510,7 +528,14 @@ class NuPagadi
         const int positionY = 13;
         const int positionX = 36;
 
-        PlaceWolf(env, positionX, positionY, "rightup");
+        try
+        {
+            PlaceWolf(env, positionX, positionY, "rightup");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     private static void PlaceWolf(char[,] env, int positionX, int positionY, string wolfPosition)
@@ -532,7 +557,10 @@ class NuPagadi
                 fileName = "wolfrightup.txt";
                 break;
         }
-
+        if (!File.Exists(fileName))
+        {
+            throw new FileNotFoundException("Wolf position file not found");
+        }
         StreamReader reader = new StreamReader(fileName);
         int verticalLinesCounter = 0;
 
@@ -590,7 +618,7 @@ class NuPagadi
         const int positionY = 4;
         PlaceRabbit(env, positionX, positionY);
     }
-    
+
     static void GameSpeed(int score, double sleepTime, double speed, double maxSpeed)
     {
         if (score % 20 == 0 && score != 0)
@@ -609,13 +637,8 @@ class NuPagadi
     {
         if (livesCount <= 0)
         {
-            //Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
-            //Console.WriteLine("GAME OVER");
-
             PrintOnPosition(Console.WindowWidth / 2 - 5, Console.WindowHeight / 2, "GAME OVER", ConsoleColor.DarkRed);
-
             Console.ReadKey();
-
             Environment.Exit(0);
         }
 
@@ -759,21 +782,13 @@ class NuPagadi
             {
                 drawClockSimbols(45, 61);
             }
-
         }
-        //Console.SetCursorPosition(Console.WindowWidth / 2 + 20, 0);
-        //Console.ForegroundColor = ConsoleColor.Cyan;
-        //Console.WriteLine("score: " + score);
-        //Console.ForegroundColor = ConsoleColor.Gray;
     }
 
     static void PrintLives(List<char> lives) // insteed of this we can use PrintOnPosition
     {
-        Console.SetCursorPosition(Console.WindowWidth / 2, 0);
+        Console.SetCursorPosition(Console.WindowWidth / 2, 2);
         Console.ForegroundColor = ConsoleColor.Magenta;
-
-        //PrintOnPosition(Console.WindowWidth / 2, 0, string.Join("", lives), ConsoleColor.Magenta);
-        //Console.WriteLine(string.Join("", lives));
 
         for (int i = 0; i < lives.Count; i++)
         {
@@ -798,19 +813,23 @@ class NuPagadi
 
     static void UpdateSpeed()
     {
-        if (score < 15)
+        if (score < 0)
+        {
+            throw new ArgumentOutOfRangeException("Score must be positive!");
+        }
+        if (score < 10)
         {
             maxTicks = 3;
         }
-        else if (score >= 15 && score < 30)
+        else if (score >= 10 && score < 20)
         {
             maxTicks = 2;
         }
-        else if (score >= 30 && score < 45)
+        else if (score >= 20 && score < 30)
         {
             maxTicks = 1;
         }
-        else //(score >= 45)
+        else //(score >= 30)
         {
             maxTicks = 0;
         }
@@ -848,7 +867,16 @@ class NuPagadi
         Console.SetWindowSize(gameFildWidth + 1, gameFieldHeight + 1); //set console window size
         Console.SetBufferSize(gameFildWidth + 1, gameFieldHeight + 1); //removes the scroll bars if equal to window size
         Console.CursorVisible = false;
-        ResetEnvironment(gameField);
+        
+        try
+        {
+            ResetEnvironment(gameField);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
         AddWolfRight(gameField);
 
         int basketUpLevel = 19;         // this far the egg can roll before crashing for upper lines
@@ -863,7 +891,7 @@ class NuPagadi
         Console.BackgroundColor = ConsoleColor.White;
 
         //PrintOnPosition(Console.WindowWidth / 2 - 10,
-         //      Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
+        //      Console.WindowHeight / 2 - 5, "Press enter to start!", ConsoleColor.DarkBlue);
         //ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
         UpdateSpeed();
@@ -1148,25 +1176,53 @@ class NuPagadi
                     if (pressedKey.Key == ConsoleKey.NumPad4)
                     {
                         basketPosition = "down left";
-                        ResetEnvironment(gameField);
+                        try
+                        {
+                            ResetEnvironment(gameField);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         AddWolfLeft(gameField);
                     }
                     if (pressedKey.Key == ConsoleKey.NumPad7)
                     {
                         basketPosition = "up left";
-                        ResetEnvironment(gameField);
+                        try
+                        {
+                            ResetEnvironment(gameField);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         AddWolfLeftUp(gameField);
                     }
                     if (pressedKey.Key == ConsoleKey.NumPad6)
                     {
                         basketPosition = "down right";
-                        ResetEnvironment(gameField);
+                        try
+                        {
+                            ResetEnvironment(gameField);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         AddWolfRight(gameField);
                     }
                     if (pressedKey.Key == ConsoleKey.NumPad9)
                     {
                         basketPosition = "up right";
-                        ResetEnvironment(gameField);
+                        try
+                        {
+                            ResetEnvironment(gameField);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         AddWolfRightUp(gameField);
                     }
                 }
